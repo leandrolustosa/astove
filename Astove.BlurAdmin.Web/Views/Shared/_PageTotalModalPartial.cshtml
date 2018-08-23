@@ -1,0 +1,28 @@
+@{
+    string str = ViewData["listProperty"] as string;
+
+    ViewBag.parent = (!string.IsNullOrEmpty(str) ? string.Format("data.modalEntity.{0}.", ViewData["listProperty"]) : "data.modalEntity.");
+    ViewBag.entity = (!string.IsNullOrEmpty(str) ? string.Format(",'{0}', ", ViewData["listProperty"]) : ",").Replace(".", "");
+}
+<div class="row">
+    <div class="col-sm-12">
+        <nav>
+            <ul class="pagination pagination-lg">
+                <li><a ng-click="filter.paginateModal(this@(ViewBag.entity)1)"><<</a></li>
+                <li><a ng-click="filter.paginateModal(this@(ViewBag.entity)@(ViewBag.parent)pagingOptions.pageIndex-1)" ng-disabled="!@(ViewBag.parent)pagingOptions.hasPreviousPage"><</a></li>
+                <li ng-repeat="n in [] | range : @(ViewBag.parent)pagingOptions.pageIndex : ((@(ViewBag.parent)pagingOptions.totalPageCount < @(ViewBag.parent)pagingOptions.pageIndex+10) ? @(ViewBag.parent)pagingOptions.totalPageCount + 1 : @(ViewBag.parent)pagingOptions.pageIndex+10)" ng-class="{ 'active' : @(ViewBag.parent)pagingOptions.pageIndex===n }"><a ng-click="filter.paginateModal(this,n)">{{n}}</a></li>
+                <li><a ng-click="filter.paginateModal(this@(ViewBag.entity)@(ViewBag.parent)pagingOptions.pageIndex+1)" ng-disabled="!@(ViewBag.parent)pagingOptions.hasNextPage">></a></li>
+                <li><a ng-click="filter.paginateModal(this@(ViewBag.entity)@(ViewBag.parent)pagingOptions.totalPageCount)">>></a></li>
+                <li class="form-group col-md-4">
+                    <select class="form-control inline" ng-change="filter.paginateModal(this@(ViewBag.entity)1)" ng-model="@(ViewBag.parent)pagingOptions.pageSize" ng-options="pageSize as pageSize for pageSize in @(ViewBag.parent)pagingOptions.pageSizes"></select>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="col-sm-12" ng-if="'@(ViewBag.parent)'!=='null' && '@(ViewBag.parent)'!==''">
+        {{@(ViewBag.parent)pagingOptions.totalCount}} registro(s) encontrado(s)
+    </div>
+    <div class="col-sm-12" ng-if="'@(ViewBag.parent)'==='null' || '@(ViewBag.parent)'===''">
+        {{@(ViewBag.parent)pagingOptions.totalCount}} registro(s) encontrado(s) em {{((elapsedTime/1000).toString().indexOf('.') > -1) ? (elapsedTime/1000).toString().substr(0, (elapsedTime/1000).toString().indexOf('.')) : (elapsedTime/1000).toString()}},{{(elapsedTime%1000 >= 100) ? (elapsedTime%1000).toString() : '0' + (elapsedTime%1000).toString()}}s
+    </div>
+</div>

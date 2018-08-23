@@ -1,0 +1,28 @@
+@{
+    Layout = null;
+}
+
+<div class="modal-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>{{title('Requisição válida')}}</h5>
+
+                    <div ng-include="'/common/astovetoolsclose'"></div>
+                </div>
+                <div class="ibox-content">
+                    
+                    <div class="col-md-4 astove-error-content-image">
+                        <span class="fa fa-check-circle fa-5x text-success"></span>
+                    </div>
+
+                    <div class="col-md-8 astove-error-content">
+                        {{message}}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

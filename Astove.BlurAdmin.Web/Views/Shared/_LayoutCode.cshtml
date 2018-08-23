@@ -1,0 +1,56 @@
+<!--
+* INSPINIA - Responsive Admin Theme
+* Version 2.0
+*
+-->
+
+<!DOCTYPE html>
+<html ng-app="@Html.Raw(ViewBag.Application != null ? ViewBag.Application : "AstoveApp")">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title set in pageTitle directive -->
+    <title>@ViewBag.Title</title>
+
+    <link rel="shortcut icon" type="image/png" href="/Content/jasmine/jasmine_favicon.png">
+
+    @Styles.Render("~/Content/jasmine")
+    @Styles.Render("~/Content/font-awesome")
+    @Styles.Render("~/Content/inspinia")
+    @RenderSection("scriptsHeader", required: false)
+    <link id="loadBefore" href="/Content/style.css" rel="stylesheet">    
+</head>
+
+<!-- ControllerAs syntax -->
+<!-- Main controller with serveral data used in Inspinia theme on diferent view -->
+<body>
+
+    <!-- Main view  -->
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery-bootstrap")
+    @Scripts.Render("~/bundles/plugins")
+
+    @RenderSection("scriptsBeforeAngular", required: false)
+
+    @Scripts.Render("~/bundles/angular")
+
+    <!--
+     You need to include this script on any page that has a Google Map.
+     When using Google Maps on your own site you MUST signup for your own API key at:
+     https://developers.google.com/maps/documentation/javascript/tutorial#api_key
+     After your sign up replace the key in the URL below..
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQTpXj82d8UpCi97wzo_nKXL7nYrd4G70"></script>
+        -->
+    @RenderSection("scriptsAfterAngular", required: false)
+
+    @Scripts.Render("~/bundles/angular-app")
+    @this.RenderViewAstoveBundle()
+
+    @RenderSection("scriptsAfterAstove", required: false)
+</body>
+</html>

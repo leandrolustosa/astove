@@ -1,0 +1,28 @@
+@{
+    Layout = null;
+}
+
+<div class="modal-body" style="z-index:1051">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>{{title('Tempo excedido')}}</h5>
+
+                    <div ng-include="'/common/astovetoolsclose'"></div>
+                </div>
+                <div class="ibox-content">
+                    
+                    <div class="col-md-4 astove-error-content-image">
+                        <span class="fa fa-clock-o fa-5x text-danger"></span>
+                    </div>
+
+                    <div class="col-md-8 astove-error-content">
+                        Operação levou mais tempo para ser realizada do que o previsto, verifique a sua conexão com a internet ou aguarde um momento e tente novamente.
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

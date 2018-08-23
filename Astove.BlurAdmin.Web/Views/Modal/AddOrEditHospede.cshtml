@@ -1,0 +1,47 @@
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Hóspedes</h5>
+
+                <div ng-include="'/common/astovetoolsclose'"></div>
+            </div>
+            <div class="ibox-content">
+                <form role="form" name="reservasForm" ng-submit="submitForm(reservasForm.$valid)" novalidate>
+
+                    <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@AstoveHelper.GetAntiForgeryToken()'" />
+
+                    <div ng-show="hasError || success" class="alert alert-dismissible" ng-class="{ 'alert-danger' : hasError, 'alert-success' : success }" role="alert">
+                        <button type="button" class="close" ng-click="showAlert=false;"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+                        <strong>{{messagetype}}!</strong> {{message}}
+                    </div>
+
+                    <div class="col-md-6 form-group" ng-class="{ 'has-error' : reservasForm.nome.$invalid && !reservasForm.nome.$pristine }">
+                        <label>Nome</label>
+                        <input name="nome" type="text" class="form-control input-lg" ng-model="data.modalModel.nome" required />
+                        <p ng-show="reservasForm.nome.$invalid && !reservasForm.nome.$pristine" class="help-block">Informe o campo Nome</p>
+                    </div>
+                    <div class="col-md-6 form-group" ng-class="{ 'has-error' : reservasForm.cpf.$invalid && !reservasForm.cpf.$pristine }">
+                        <label>CPF</label>
+                        <input name="cpf" type="text" class="form-control input-lg" ng-model="data.modalModel.cpf" ui-mask="999.999.999-99" model-view-value="true" />
+                    </div>
+                    <div class="col-md-6 form-group" ng-class="{ 'has-error' : reservasForm.telefone.$invalid && !reservasForm.telefone.$pristine }">
+                        <label>Telefone</label>
+                        <input name="telefone" type="text" class="form-control input-lg" ng-model="data.modalModel.telefone" ui-mask="(99)9999-9999" model-view-value="true" />
+                    </div>
+                    <div class="col-md-6 form-group" ng-class="{ 'has-error' : reservasForm.email.$invalid && !reservasForm.email.$pristine }">
+                        <label>E-mail</label>
+                        <input name="email" type="text" class="form-control input-lg" ng-model="data.modalModel.email" />
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary btn-lg pull-right" ng-disabled="reservasForm.$invalid">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

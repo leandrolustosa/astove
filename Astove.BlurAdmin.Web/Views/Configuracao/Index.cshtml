@@ -1,0 +1,41 @@
+
+@{
+    ViewBag.Title = "Configuração";
+}
+@section scriptsHeader
+{
+    @Styles.Render("~/Content/icheck")
+    @Styles.Render("~/Content/datapicker")
+    @Styles.Render("~/Content/chosen")
+    @Styles.Render("~/Content/ngimgcrop")
+    @Styles.Render("~/Content/summernote")
+    @Styles.Render("~/Content/steps")
+}
+@section scriptsAfterAngular
+{
+    @Scripts.Render("~/bundles/icheck")
+}
+@section scriptsAfterAstove
+{
+    @Scripts.Render("~/bundles/datePicker")
+    @Scripts.Render("~/bundles/peity")
+    @Scripts.Render("~/bundles/summernote")
+}
+
+<div ui-view></div>
+
+<style>
+    .cropArea {
+        overflow: hidden;
+        width: 400px;
+        height: 300px;
+    }
+</style>
+
+<style>
+    .cropModalArea {
+        overflow: hidden;
+        width: 200px;
+        height: 150px;
+    }
+</style>

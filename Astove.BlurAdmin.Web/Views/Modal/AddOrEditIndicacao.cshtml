@@ -1,0 +1,83 @@
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Indicações</h5>
+
+                <div ng-include="'/common/astovetoolsclose'"></div>
+            </div>
+            <div class="ibox-content">
+                <form role="form" name="indicacoesForm" ng-submit="submitForm(indicacoesForm.$valid)" novalidate>
+
+                    <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@AstoveHelper.GetAntiForgeryToken()'" />
+
+                    <div ng-show="hasError || success" class="alert alert-dismissible" ng-class="{ 'alert-danger' : hasError, 'alert-success' : success }" role="alert">
+                        <button type="button" class="close" ng-click="showAlert=false;"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+                        <strong>{{messagetype}}!</strong> {{message}}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 form-group" ng-class="{ 'has-error' : indicacoesForm.cnpj.$invalid && !indicacoesForm.cnpj.$pristine }">
+                            <label>CNPJ</label>
+                            <input name="cnpj" type="text" class="form-control input-lg" ng-model="data.modalModel.cnpj" required ui-mask="99.999.999/9999-99" model-view-value="true" />
+                            <p ng-show="indicacoesForm.cnpj.$invalid && !indicacoesForm.cnpj.$pristine" class="help-block">Informe o campo CNPJ</p>
+                        </div>
+                        <div class="col-md-6 form-group" ng-class="{ 'has-error' : indicacoesForm.nomefantasia.$invalid && !indicacoesForm.nomefantasia.$pristine }">
+                            <label>Nome Fantasia</label>
+                            <input name="nomefantasia" type="text" class="form-control input-lg" ng-model="data.modalModel.nomeFantasia" required />
+                            <p ng-show="indicacoesForm.nomefantasia.$invalid && !indicacoesForm.nomefantasia.$pristine" class="help-block">Informe o campo Nome Fantasia</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group" ng-class="{ 'has-error' : indicacoesForm.razaosocial.$invalid && !indicacoesForm.razaosocial.$pristine }">
+                            <label>Razão Social</label>
+                            <input name="razaosocial" type="text" class="form-control input-lg" ng-model="data.modalModel.razaoSocial" required />
+                            <p ng-show="indicacoesForm.razaosocial.$invalid && !indicacoesForm.razaosocial.$pristine" class="help-block">Informe o campo Razão Social</p>
+                        </div>
+                        <div class="col-md-6 form-group" ng-class="{ 'has-error' : indicacoesForm.nomecomprador.$invalid && !indicacoesForm.nomecomprador.$pristine }">
+                            <label>Comprador</label>
+                            <input name="nomecomprador" type="text" class="form-control input-lg" ng-model="data.modalModel.nomeComprador" required />
+                            <p ng-show="indicacoesForm.nomecomprador.$invalid && !indicacoesForm.nomecomprador.$pristine" class="help-block">Informe o campo Comprador</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group" ng-class="{ 'has-error' : indicacoesForm.estado.$invalid && !indicacoesForm.estado.$pristine }">
+                            <label>UF</label>
+                            <select chosen id="estado" class="form-control chosen-select" ng-model="data.modalModel.estadoKV" ng-change="setEstadoId();" ng-options="kv as kv.value for kv in data.modalModel.estado.items track by kv.key" data-placeholder-text-single="'Selecione um(a) UF'"></select>
+                        </div>
+                        <div class="col-md-6 form-group" ng-class="{ 'has-error' : indicacoesForm.cidadeoptions.$invalid && !indicacoesForm.cidadeoptions.$pristine }">
+                            <label>Cidade</label>
+                            <select chosen id="cidade" class="form-control chosen-select" ng-model="data.modalModel.cidadeOptionsKV" ng-change="setCidadeId()" ng-options="kv as kv.value for kv in data.modalModel.cidadeOptions.items track by kv.key" data-placeholder-text-single="'Selecione um(a) Cidade'"></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group" ng-class="{ 'has-error' : (indicacoesForm.telefone.$invalid && !indicacoesForm.telefone.$pristine) || data.modalModel.telefoneInvalido }">
+                            <label>Telefone</label>
+                            <input name="telefone" type="text" class="form-control input-lg" ng-model="data.modalModel.telefone" required ui-mask="(99)9999-9999" model-view-value="true" />
+                            <p ng-show="indicacoesForm.telefone.$invalid && !indicacoesForm.telefone.$pristine" class="help-block">Informe o campo Telefone</p>
+                        </div>
+                        <div class="col-md-6 form-group" ng-class="{ 'has-error' : (indicacoesForm.celular.$invalid && !indicacoesForm.celular.$pristine) || data.modalModel.celularInvalido }">
+                            <label>Celular</label>
+                            <input name="celular" type="text" class="form-control input-lg" ng-model="data.modalModel.celular" ng-change="setCelularMask()" required ui-mask="{{celularMask}}" model-view-value="true" />
+                            <p ng-show="indicacoesForm.celular.$invalid && !indicacoesForm.celular.$pristine" class="help-block">Informe o campo Celular</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 form-group" ng-class="{ 'has-error' : (indicacoesForm.email.$invalid && !indicacoesForm.email.$pristine)  || data.modalModel.emailInvalido }">
+                            <label>E-mail</label>
+                            <input name="email" type="email" class="form-control input-lg" ng-model="data.modalModel.email" required pattern="[a-z0-9._%+-]+&#64;[a-z0-9.-]+\.[a-z]{2,4}$" />
+                            <p ng-show="indicacoesForm.email.$invalid && !indicacoesForm.email.$pristine" class="help-block">Informe o campo E-mail</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary btn-lg pull-right" ng-disabled="indicacoesForm.$invalid">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

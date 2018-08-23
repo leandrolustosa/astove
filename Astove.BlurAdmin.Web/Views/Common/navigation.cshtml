@@ -1,0 +1,48 @@
+@{
+    Layout = null;
+}
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div ng-controller="ProfileCtrl" class="sidebar-collapse">
+        <ul side-navigation class="nav" id="side-menu">
+            <li class="nav-header">
+
+                <div class="dropdown profile-element" dropdown>
+                    <img alt="image" class="img-circle" ng-src="{{(data.profile.imagemUrl == null || data.profile.imagemUrl == '') ? 'https://placehold.it/75x75' : data.profile.imagemUrl}}" width="75" height="75" />
+                    <a class="dropdown-toggle" dropdown-toggle data-toggle="dropdown" href>
+                            <span class="clear">
+                                <span class="block m-t-xs">
+                                    <strong class="font-bold">{{data.profile.nome}}</strong>
+                             </span>
+                                <span class="text-muted text-xs block">{{data.profile.cargo}} <b class="caret"></b></span>
+                            </span>
+                    </a>
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()                        
+                    }
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li ui-sref-active="active"><a ng-click="editarPerfil(data.profile.id)">Perfil</a></li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="javascript:document.getElementById('logoutForm').submit()">Sair</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    <img img="img-responsive center-block" src="~/Images/logo_mini.jpg" alt="YES"/>
+                </div>
+            </li>            
+            <li ng-show="apresentaMenuConfiguracoes" ng-class="{active: $state.includes('cfg')}">
+                <a href="/cfg"><i class="fa fa-cogs"></i> <span class="nav-label">Configura��es</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" ng-class="{in: $state.includes('cfg')}">
+                    <li ng-if="apresentaMenuConfiguracoes" ui-sref-active="active"><a ui-sref="cfg.atualizar">Alterar</a></li>
+                    <li ng-if="apresentaMenuConfiguracoes" ui-sref-active="active"><a ui-sref="cfg.inserirevento">Novo evento</a></li>
+                    <li ng-if="apresentaMenuReservas" ui-sref-active="active"><a ui-sref="cfg.atualizarevento">Importar expositores</a></li>
+                    <li ng-if="apresentaMenuReservas" ui-sref-active="active"><a ui-sref="cfg.listahotel">Lista de hot�is</a></li>
+                    <li ng-if="apresentaMenuReservas" ui-sref-active="active"><a ui-sref="cfg.inserirhotel">Novo hotel</a></li>                    
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+</nav>

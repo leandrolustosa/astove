@@ -1,0 +1,63 @@
+<!--
+* INSPINIA - Responsive Admin Theme
+* Version 2.0
+*
+-->
+
+<!DOCTYPE html>
+<html ng-app="AstoveApp">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title set in pageTitle directive -->
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/font-awesome")
+    @Styles.Render("~/Content/inspinia")
+    @Styles.Render("~/Content/chosen")
+    @Styles.Render("~/Content/icheck")
+        <link id="loadBefore" href="/Content/style.css" rel="stylesheet">
+</head>
+
+<!-- ControllerAs syntax -->
+<!-- Main controller with serveral data used in Inspinia theme on diferent view -->
+<body ng-controller="MainCtrl as main" ng-class="[global.skinClass, global.collapseMenuClass]">
+
+    <div id="ProgressDIV" ng-show="global.loading" ng-controller="LoadingCtrl">
+        <div class="box-load">
+            <label>
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+                <span class="sr-only">Carregando...</span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Main view  -->
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery-bootstrap")
+    @Scripts.Render("~/bundles/plugins")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/chosen")
+    @Scripts.Render("~/bundles/icheck")
+    <!--
+     You need to include this script on any page that has a Google Map.
+     When using Google Maps on your own site you MUST signup for your own API key at:
+     https://developers.google.com/maps/documentation/javascript/tutorial#api_key
+     After your sign up replace the key in the URL below..
+    
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQTpXj82d8UpCi97wzo_nKXL7nYrd4G70"></script>
+    -->
+
+    @Scripts.Render("~/bundles/angular-app")
+    @this.RenderViewAstoveBundle()
+    @Scripts.Render("~/bundles/angular-flot")
+    @Scripts.Render("~/bundles/angle")
+    @Scripts.Render("~/bundles/peity")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,65 @@
+﻿.form-group .astove-select { width:calc(100% - 55px); }
+.form-group .astove-button-add { right:-10px; top: 3px; }
+
+.clickableRow {
+    cursor: pointer;
+}
+
+.astove-modal-error {
+    z-index: 2061 !important;
+}
+
+.ui-autocomplete {
+  z-index: 10 !important;
+  /* margin-left: 5px; */
+  border-radius: 5px;
+  /* margin: 0; */
+  padding-left: 5px;
+  clear: both;
+  background: white;
+  position: absolute;
+  margin-top: 33px;
+  width: 100%;
+  max-height: 350px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+}
+
+.fa-circle { color: #fff; }
+.fa-lg {
+    width: 1em;
+    line-height: 1em;
+}
+
+.astove-error-content-image {
+    margin-top: 20px;
+    left: 15%; 
+    margin-left:-80px;
+}
+
+.astove-error-content {
+    margin-top: 20px;
+}
+
+hr.divider {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+
+.vert-align tbody>tr>td, .vert-align tbody>tr>td>div {
+    margin: 2px 0 2px 0  !important;
+    vertical-align: middle !important;       
+}
+
+.custom-padding tbody>tr>td {
+    padding: 12px 0 0 0 !important; 
+}
+
+.wizard-reservas {
+    min-height: 220px;
+}
+
+/* LOADING */
+#ProgressDIV{ background:rgba(0,  0,  0,  0.3); position:fixed; width:100%; height:100%; top:0px; left:0; margin-left:0px; z-index:10002; }
+#ProgressDIV > .box-load{ color: white; left: 50%; top:50%; margin-left:-80px; padding:10px 15px; position: absolute;}

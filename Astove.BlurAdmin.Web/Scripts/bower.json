@@ -1,0 +1,56 @@
+{
+  "name": "angularjsmvc",
+  "version": "1.0.0",
+  "authors": [
+    "Leandro Lustosa <leandro@ainbox.com.br>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.5",
+    "angular-route": "1.5.5",
+    "jquery": "2.1.4",
+    "jquery-ui": "1.11.4",
+    "underscore": "1.8.3",
+    "jquery-color": "2.1.2",
+    "jcrop": "2.0.4",
+    "angular-animate": "1.5.5",
+    "angular-aria": "1.5.5",
+    "angular-cookies": "1.5.5",
+    "angular-loader": "1.5.5",
+    "angular-messages": "1.5.5",
+    "angular-mocks": "1.5.5",
+    "angular-scenario": "1.5.5",
+    "angular-touch": "1.5.5",
+    "ng-file-upload": "12.0.4",
+    "angular-loading-bar": "0.9.0",
+    "angular-resource": "1.5.5",
+    "angular-ui-date": "1.0.1",
+    "angular-ui-utils": "3.0.0",
+    "bootstrap": "3.3.6",
+    "jasny-bootstrap": "3.1.3",
+    "angular-sanitize": "1.5.5",
+    "fontawesome": "4.6.3",
+    "simple-line-icons": "2.3.1",
+    "modernizr": "3.3.1",
+    "angular-translate": "2.11.0",
+    "angular-translate-storage-local": "2.11.0",
+    "ui-router": "0.3.0",
+    "ngstorage": "0.3.10",
+    "oclazyload": "1.0.9",
+    "angular-translate-loader-static-files": "2.11.0",
+    "codemirror": "5.15.0"
+  },
+  "resolutions": {
+    "angular": ">=1.5.5",
+    "angular-cookies": "1.5.5",
+    "angular-translate": "2.11.0"
+  }
+}

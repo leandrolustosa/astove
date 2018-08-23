@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title set in pageTitle directive -->
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/font-awesome")
+    @Styles.Render("~/Content/css")
+    <link id="loadBefore" href="/Content/style.css" rel="stylesheet">
+</head>
+
+<!-- ControllerAs syntax -->
+<!-- Main controller with serveral data used in Inspinia theme on diferent view -->
+<body class="gray-bg">
+
+    <!-- Main view  -->
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/angular/login")
+    @Scripts.Render("~/bundles/astove/login")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

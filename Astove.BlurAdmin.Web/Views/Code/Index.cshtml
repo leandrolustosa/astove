@@ -1,0 +1,100 @@
+@{
+    Layout = "~/Views/Shared/_LayoutCode.cshtml";
+    ViewBag.Title = "Code";
+    ViewBag.Application = "codeApp";
+}
+@section scriptsHeader
+{
+    @Styles.Render("~/Content/css/codemirror")
+}
+@section scriptsAfterAstove {
+    @Scripts.Render("~/bundles/codemirror")
+    @Scripts.Render("~/bundles/ui-codemirror")
+    @Scripts.Render("~/bundles/code")
+
+}
+
+<div class="row" ng-controller="codeCtrl">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <h3 class="text-primary">Gerador de código</h3>
+        <form name="codeForm" ng-submit="submitForm(codeForm.$valid)" novalidate>
+            <div class="form-group" ng-class="{ 'has-error' : codeForm.group.$invalid && !codeForm.group.$pristine }">
+                <label>Grupo</label>
+                <select class="form-control" name="group" ng-model="model.postModel.groupKV" ng-change="updateModels()" ng-options="item as item.value for item in model.groups.items track by item.key" required>
+                    <option value="">
+                        (selecione)
+                    </option>
+                </select>
+                <p ng-show="codeForm.group.$invalid && !codeForm.group.$pristine" class="help-block">
+                    Informe o grupo.
+                </p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : codeForm.model.$invalid && !codeForm.model.$pristine }">
+                <label>Modelo</label>
+                <select class="form-control" name="model" ng-model="model.postModel.modelId" ng-options="model.id as model.name for model in model.models" required>
+                    <option value="">
+                        (selecione)
+                    </option>
+                </select>
+                <p ng-show="codeForm.model.$invalid && !codeForm.model.$pristine" class="help-block">
+                    Informe o modelo.
+                </p>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.postModel.isFullModel"> O modelo é full?
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.postModel.isModal"> O modelo é modal?
+                </label>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : codeForm.screen.$invalid && !codeForm.screen.$pristine }">
+                <label>Visualização</label>
+                <select class="form-control" name="screen" ng-model="model.postModel.screenId" ng-change="updateFields()" ng-options="screenId for screenId in model.screens" required>
+                    <option value="">
+                        (selecione)
+                    </option>
+                </select>
+                <p ng-show="codeForm.screen.$invalid && !codeForm.screen.$pristine" class="help-block">
+                    Informe o tipo de visualização.
+                </p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : codeForm.nomeForm.$invalid && !codeForm.nomeForm.$pristine }" ng-show="model.postModel.screenId=='Insert/Update'">
+                <label>
+                    Nome do formulário
+                </label>
+                <input name="nomeForm" type="text" class="form-control" ng-model="model.postModel.formName" required />
+                <p ng-show="codeForm.nomeForm.$invalid && !codeForm.nomeForm.$pristine" class="help-block">
+                    Informe o nome do formulário.
+                </p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : codeForm.submitMethod.$invalid && !codeForm.submitMethod.$pristine }" ng-show="model.postModel.screenId=='Insert/Update'">
+                <label>
+                    Método do submit (ex.: submitForm)
+                </label>
+                <input name="submitMethod" type="text" class="form-control" ng-model="model.postModel.submitMethod" required />
+                <p ng-show="codeForm.submitMethod.$invalid && !codeForm.submitMethod.$pristine" class="help-block">
+                    Informe o nome do método de submit.
+                </p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : codeForm.buttonText.$invalid && !codeForm.buttonText.$pristine }">
+                <label>
+                    Texto do Botão
+                </label>
+                <input name="buttonText" type="text" class="form-control" ng-model="model.postModel.buttonText" required />
+                <p ng-show="codeForm.buttonText.$invalid && !codeForm.buttonText.$pristine" class="help-block">
+                    Informe o texto do botão.
+                </p>
+            </div>
+            <button type="submit" class="btn btn-primary right" ng-disabled="codeForm.$invalid">
+                ENVIAR
+            </button>
+        </form>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+        <h3 class="text-primary">Código fonte</h3>
+        <div ui-codemirror ng-model="model.html" ui-refresh='refresh' style="height: 100%"></div>
+    </div>
+</div>

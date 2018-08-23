@@ -1,0 +1,111 @@
+@{
+    Layout = null;
+}
+
+<div class="widgets">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div ba-panel ba-panel-title="Informar novas indica��es">
+                
+                <form role="form" name="eventosForm" ng-submit="submitForm(eventosForm.$valid)" novalidate>
+
+                    <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@AstoveHelper.GetAntiForgeryToken()'" />
+
+                    <div ng-show="hasError || success" class="alert alert-dismissible" ng-class="{ 'alert-danger' : hasError, 'alert-success' : success }" role="alert">
+                        <button type="button" class="close" ng-click="showAlert=false;"><span aria-hidden="true">�</span><span class="sr-only">Fechar</span></button>
+                        <strong>{{messagetype}}!</strong> {{message}}
+                    </div>
+
+                    <div class="row">
+
+                        <div ng-show="!eventoSelecionado" class="col-md-12">
+                            <div class="col-md-12 table-responsive">
+                                <h5>Escolha um evento:</h5>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th><div class="btn"><b>Expositor</b></div></th>
+                                            <th><div class="btn"><b>Evento</b></div></th>
+                                            <th><div class="btn"><b>Cidade</b></div></th>
+                                            <th><div class="btn"><b>Estado</b></div></th>
+                                            <th><div class="btn"><b>In�cio</b></div></th>
+                                            <th><div class="btn"><b>T�rmino</b></div></th>
+                                            <th><div class="btn"><b>Indica��es</b></div></th>
+                                            <th style="width: 40px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in datalist.entity.items" ng-class="rowEventoClass(item)">
+                                            <td>{{item.expositorNome}}</td>
+                                            <td>{{item.eventoNome}}</td>
+                                            <td>{{item.eventoCidade}}</td>
+                                            <td>{{item.eventoEstadoSigla}}</td>
+                                            <td>{{item.eventoDataInicio | date: 'dd/MM/yyyy'}}</td>
+                                            <td>{{item.eventoDataTermino | date: 'dd/MM/yyyy'}}</td>
+                                            <td>{{item.numeroIndicados}}</td>
+                                            <td><div class="btn btn-primary btn-sm" ng-click="selecionarEvento(item)" bs-tooltip title="selecionar"><span class="fa fa-hand-pointer-o fa-lg"></span></div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div ng-show="eventoSelecionado" class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="pull-right">
+                                    <div class="btn btn-info btn-lg" ng-show="datalist.entity.items.length>1" ng-click="voltarSelecionarEvento()">Selecionar outro evento</div>
+                                    <div class="btn btn-success btn-lg" ng-click="openAddIndicacao()" ng-disabled="evento.numeroIndicados === evento.eventoNumeroMaximoIndicacoes || !indicacao.habilitado">Nova indica��o</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th><div class="btn"><b>Status</b></div></th>
+                                            <th><div class="btn"><b>CNPJ</b></div></th>
+                                            <th><div class="btn"><b>Nome Fantasia</b></div></th>
+                                            <th><div class="btn"><b>Raz�o Social</b></div></th>
+                                            <th><div class="btn"><b>Nome do Comprador</b></div></th>
+                                            <th><div class="btn"><b>Cidade</b></div></th>
+                                            <th><div class="btn"><b>Estado</b></div></th>
+                                            <th><div class="btn"><b>Telefone</b></div></th>
+                                            <th><div class="btn"><b>Celular</b></div></th>
+                                            <th><div class="btn"><b>E-mail</b></div></th>
+                                            <th style="width: 40px;"></th>
+                                            <th style="width: 40px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-if="data.model.indicacoes.length>0" ng-repeat="item in data.model.indicacoes">
+                                            <td>{{item.statusText}}</td>
+                                            <td>{{item.cnpj}}</td>
+                                            <td>{{item.nomeFantasia}}</td>
+                                            <td>{{item.razaoSocial}}</td>
+                                            <td>{{item.nomeComprador}}</td>
+                                            <td>{{item.cidadeNome}}</td>
+                                            <td>{{item.siglaUF}}</td>
+                                            <td>{{item.telefone}}</td>
+                                            <td>{{item.celular}}</td>
+                                            <td>{{item.email}}</td>
+                                            <td><div class="btn btn-primary btn-sm" ng-click="openEditIndicacao(item)" bs-tooltip title="editar" ng-disabled="!item.habilitado"><span class="fa fa-edit fa-lg"></span></div></td>
+                                            <td><div class="btn btn-danger btn-sm" ng-click="deleteIndicacao($index)" bs-tooltip title="excluir" ng-disabled="!item.habilitado"><span class="fa fa-trash-o fa-lg"></span></div></td>
+                                        </tr>
+                                        <tr ng-if="data.model.indicacoes.length===0" ng-repeat="item in data.model.indicacoes">
+                                            <td colspan="11">Nenhuma indica��o informada, clique no bot�o acima "Nova Indica��o" para informar uma.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary btn-lg pull-right" ng-show="data.model.novasIndicacoes.length>0">Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

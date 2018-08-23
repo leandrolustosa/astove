@@ -1,0 +1,51 @@
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Pretenção de visita</h5>
+
+                <div ng-include="'/common/astovetoolsclose'"></div>
+            </div>
+            <div class="ibox-content">
+                <form role="form" name="reservasForm" ng-submit="submitForm(reservasForm.$valid)" novalidate>
+
+                    <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@AstoveHelper.GetAntiForgeryToken()'" />
+
+                    <div ng-show="hasError || success" class="alert alert-dismissible" ng-class="{ 'alert-danger' : hasError, 'alert-success' : success }" role="alert">
+                        <button type="button" class="close" ng-click="showAlert=false;"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+                        <strong>{{messagetype}}!</strong> {{message}}
+                    </div>
+
+                    <div class="col-md-12 form-group" ng-class="{ 'has-error' : reservasForm.expositoroptions.$invalid && !reservasForm.expositoroptions.$pristine }">
+                        <label>Expositor</label>
+                        <select chosen id="eventoexpositor" class="form-control chosen-select" ng-model="data.modalModel.expositorOptions.selected" ng-change="setEventoExpositorId()" ng-options="kv as kv.value for kv in data.modalModel.expositorOptions.items track by kv.key" data-placeholder-text-single="'Selecione um(a) Expositor'"></select>
+                    </div>
+                    <div class="col-md-6 form-group" ng-class="{ 'has-error' : reservasForm.data.$invalid && !reservasForm.data.$pristine }">
+                        <label>Data da Visita</label>
+                        <div class="input-group date">
+                            <input name="data" type="datetime" class="form-control input-lg" date-time ng-model="data.modalModel.data" ng-change="onChangeData()" view="date" format="DD/MM/YYYY" min-view="date" auto-close="true" required />
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                        <p ng-show="reservasForm.data.$invalid && !reservasForm.data.$pristine" class="help-block">Informe o campo Data da Visita</p>
+                    </div>
+                    <div class="col-md-6 form-group" ng-class="{ 'has-error' : reservasForm.datahoraoptions.$invalid && !reservasForm.datahoraoptions.$pristine }">
+                        <label>Hora da visita</label>
+                        <select chosen id="agenda" class="form-control chosen-select" ng-model="data.modalModel.dataHoraOptions.selected" ng-change="setDataHora()" ng-options="kv as kv.value for kv in data.modalModel.dataHoraOptions.items track by kv.key" data-placeholder-text-single="'Selecione um(a) Hora da visita'"></select>
+                    </div>
+                    <div class="col-md-12 form-group" ng-class="{ 'has-error' : reservasForm.observacao.$invalid && !reservasForm.observacao.$pristine }">
+                        <label>Observação</label>
+                        <br /><textarea name="observacao" class="form-control input-lg" rows="4" ng-model="data.modalModel.observacao"></textarea>
+                        <p ng-show="reservasForm.observacao.$invalid && !reservasForm.observacao.$pristine" class="help-block">Informe o campo Observação</p>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary btn-lg pull-right" ng-disabled="reservasForm.$invalid">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

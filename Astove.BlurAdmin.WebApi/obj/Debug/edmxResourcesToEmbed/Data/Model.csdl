@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DataModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DataEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+    <EntitySet Name="sec_oauthtoken" EntityType="DataModel.sec_oauthtoken" />
+    <EntitySet Name="sec_papel" EntityType="DataModel.sec_papel" />
+    <EntitySet Name="sec_usuariosistemaassociado" EntityType="DataModel.sec_usuariosistemaassociado" />
+    <EntitySet Name="sec_usuariosistemaassociadooauth" EntityType="DataModel.sec_usuariosistemaassociadooauth" />
+    <EntitySet Name="usuariosistema" EntityType="DataModel.usuariosistema" />
+    <AssociationSet Name="FK_Associado_Usuario" Association="DataModel.FK_Associado_Usuario">
+      <End Role="usuariosistema" EntitySet="usuariosistema" />
+      <End Role="sec_usuariosistemaassociado" EntitySet="sec_usuariosistemaassociado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OAuth_Usuario" Association="DataModel.FK_OAuth_Usuario">
+      <End Role="usuariosistema" EntitySet="usuariosistema" />
+      <End Role="sec_usuariosistemaassociadooauth" EntitySet="sec_usuariosistemaassociadooauth" />
+    </AssociationSet>
+    <AssociationSet Name="sec_usuariosistemapapel" Association="DataModel.sec_usuariosistemapapel">
+      <End Role="sec_papel" EntitySet="sec_papel" />
+      <End Role="usuariosistema" EntitySet="usuariosistema" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="sec_oauthtoken">
+    <Key>
+      <PropertyRef Name="Token" />
+    </Key>
+    <Property Name="Token" Type="String" Nullable="false" />
+    <Property Name="Secret" Type="String" />
+  </EntityType>
+  <EntityType Name="sec_papel">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="RoleName" Type="String" />
+    <NavigationProperty Name="usuariosistema" Relationship="DataModel.sec_usuariosistemapapel" FromRole="sec_papel" ToRole="usuariosistema" />
+  </EntityType>
+  <EntityType Name="sec_usuariosistemaassociado">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" />
+    <Property Name="ConfirmationToken" Type="String" />
+    <Property Name="IsConfirmed" Type="Boolean" />
+    <Property Name="LastPasswordFailureDate" Type="DateTime" />
+    <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" />
+    <Property Name="PasswordChangedDate" Type="DateTime" />
+    <Property Name="PasswordSalt" Type="String" />
+    <Property Name="PasswordVerificationToken" Type="String" />
+    <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" />
+    <NavigationProperty Name="usuariosistema" Relationship="DataModel.FK_Associado_Usuario" FromRole="sec_usuariosistemaassociado" ToRole="usuariosistema" />
+  </EntityType>
+  <EntityType Name="sec_usuariosistemaassociadooauth">
+    <Key>
+      <PropertyRef Name="Provider" />
+      <PropertyRef Name="ProviderUserId" />
+    </Key>
+    <Property Name="Provider" Type="String" Nullable="false" />
+    <Property Name="ProviderUserId" Type="String" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="usuariosistema" Relationship="DataModel.FK_OAuth_Usuario" FromRole="sec_usuariosistemaassociadooauth" ToRole="usuariosistema" />
+  </EntityType>
+  <EntityType Name="usuariosistema">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="UserName" Type="String" Nullable="false" />
+    <Property Name="Email" Type="String" />
+    <Property Name="Facebook" Type="String" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Rate" Type="Double" />
+    <Property Name="LastName" Type="String" />
+    <Property Name="FirstName" Type="String" />
+    <Property Name="Discriminator" Type="String" Nullable="false" />
+    <Property Name="Token" Type="String" />
+    <Property Name="ClienteId" Type="Int32" />
+    <Property Name="ProdutoPersonalizadoId" Type="Int32" />
+    <Property Name="DataExpiracaoToken" Type="DateTime" />
+    <Property Name="UsuarioId" Type="Int32" />
+    <NavigationProperty Name="sec_usuariosistemaassociado" Relationship="DataModel.FK_Associado_Usuario" FromRole="usuariosistema" ToRole="sec_usuariosistemaassociado" />
+    <NavigationProperty Name="sec_usuariosistemaassociadooauth" Relationship="DataModel.FK_OAuth_Usuario" FromRole="usuariosistema" ToRole="sec_usuariosistemaassociadooauth" />
+    <NavigationProperty Name="sec_papel" Relationship="DataModel.sec_usuariosistemapapel" FromRole="usuariosistema" ToRole="sec_papel" />
+  </EntityType>
+  <Association Name="FK_Associado_Usuario">
+    <End Role="usuariosistema" Type="DataModel.usuariosistema" Multiplicity="1" />
+    <End Role="sec_usuariosistemaassociado" Type="DataModel.sec_usuariosistemaassociado" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="usuariosistema">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="sec_usuariosistemaassociado">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OAuth_Usuario">
+    <End Role="usuariosistema" Type="DataModel.usuariosistema" Multiplicity="1" />
+    <End Role="sec_usuariosistemaassociadooauth" Type="DataModel.sec_usuariosistemaassociadooauth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuariosistema">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="sec_usuariosistemaassociadooauth">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="sec_usuariosistemapapel">
+    <End Role="sec_papel" Type="DataModel.sec_papel" Multiplicity="*" />
+    <End Role="usuariosistema" Type="DataModel.usuariosistema" Multiplicity="*" />
+  </Association>
+</Schema>

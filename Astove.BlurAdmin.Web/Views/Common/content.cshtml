@@ -1,0 +1,27 @@
+@{
+    Layout = null;
+}
+
+<div class="body-bg"></div>
+<main ng-if="$pageFinishedLoading" ng-class="{ 'menu-collapsed': $baSidebarService.isMenuCollapsed() }">
+    <ba-sidebar></ba-sidebar>
+    <page-top></page-top>
+    <div class="al-main">
+        <div class="al-content">
+            <content-top></content-top>
+            <!-- Main view  -->
+            <ui-view></ui-view>
+        </div>
+    </div>
+    <footer class="al-footer clearfix">
+        <div class="al-footer-right"><small>Desenvolvido por <a href="http://www.ainbox.com.br">&nbsp;&nbsp;<img class="img-responsive pull-right" alt="AI'n'Box" src="/images/logo-ainbox.png" /></a></small></div>
+        <div class="al-footer-main clearfix">
+            <div class="al-copy">Blur Admin 2016</div>
+        </div>
+    </footer>
+    <back-top></back-top>
+</main>
+<div id="preloader" ng-show="!$pageFinishedLoading">
+    <div></div>
+</div>
+

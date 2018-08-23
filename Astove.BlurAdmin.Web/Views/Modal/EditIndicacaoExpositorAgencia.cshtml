@@ -1,0 +1,44 @@
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Associar Indicações</h5>
+                <div ng-include="'/common/astovetoolsclose'"></div>
+            </div>
+            <div class="ibox-content">
+                <form role="form" name="indicacoesForm" ng-submit="submitForm(indicacoesForm.$valid)" novalidate>
+
+                    <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@AstoveHelper.GetAntiForgeryToken()'" />
+
+                    <div ng-show="hasError || success" class="alert alert-dismissible" ng-class="{ 'alert-danger' : hasError, 'alert-success' : success }" role="alert">
+                        <button type="button" class="close" ng-click="showAlert=false;"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+                        <strong>{{messagetype}}!</strong> {{message}}
+                    </div>
+
+                    <div class="col-md-12 form-group" ng-class="{ 'has-error' : indicacoesForm.telefoneinvalido.$invalid && !indicacoesForm.telefoneinvalido.$pristine }">
+                        <label>Telefone Inválido?</label>&nbsp;<input icheck name="telefoneinvalido" type="checkbox" class="form-control input-lg" ng-model="data.modalModel.telefoneInvalido" />
+                        <input name="telefone" type="text" class="form-control input-lg" ng-model="data.modalModel.telefone" ui-mask="(99)9999-9999" model-view-value="true" ng-disabled="true" />
+                    </div>
+                    <div class="col-md-12 form-group" ng-class="{ 'has-error' : indicacoesForm.celularinvalido.$invalid && !indicacoesForm.celularinvalido.$pristine }">
+                        <label>Celular Inválido?</label>&nbsp;<input icheck name="celularinvalido" type="checkbox" class="form-control input-lg" ng-model="data.modalModel.celularInvalido" />
+                        <input name="celular" type="text" class="form-control input-lg" ng-model="data.modalModel.celular" ui-mask="(99)9999-9999" model-view-value="true" ng-disabled="true" />
+                    </div>
+                    <div class="col-md-12 form-group" ng-class="{ 'has-error' : indicacoesForm.emailinvalido.$invalid && !indicacoesForm.emailinvalido.$pristine }">
+                        <label>E-mail Inválido?</label>&nbsp;<input icheck name="emailinvalido" type="checkbox" class="form-control input-lg" ng-model="data.modalModel.emailInvalido" />                        
+                        <input name="email" type="email" class="form-control input-lg" ng-model="data.modalModel.email" ng-disabled="true" />
+                    </div>
+                    <div class="col-md-12 form-group" ng-class="{ 'has-error' : indicacoesForm.observacao.$invalid && !indicacoesForm.observacao.$pristine }">
+                        <label>Observação</label>
+                        <br /><textarea name="observacao" class="form-control input-lg" rows="4" ng-model="data.modalModel.observacao"></textarea>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary btn-lg pull-right" ng-disabled="indicacoesForm.$invalid">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

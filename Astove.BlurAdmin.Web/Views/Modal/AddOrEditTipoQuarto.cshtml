@@ -1,0 +1,65 @@
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Disponibilidade</h5>
+                <div ng-include="'/common/astovetoolsclose'"></div>
+            </div>
+            <div class="ibox-content">
+                <form role="form" name="hoteisForm" ng-submit="submitForm(hoteisForm.$valid)" novalidate>
+
+                    <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@AstoveHelper.GetAntiForgeryToken()'" />
+
+                    <div ng-show="hasError || success" class="alert alert-dismissible" ng-class="{ 'alert-danger' : hasError, 'alert-success' : success }" role="alert">
+                        <button type="button" class="close" ng-click="showAlert=false;"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+                        <strong>{{messagetype}}!</strong> {{message}}
+                    </div>
+
+                    <div class="col-md-6 form-group" ng-class="{ 'has-error' : hoteisForm.tipoquartooptions.$invalid && !hoteisForm.tipoquartooptions.$pristine }">
+                        <label>Tipo de Quarto</label>
+                        <select chosen id="tipoquarto" class="form-control input-lg" ng-model="data.modalModel.tipoQuartoOptions.selected" ng-change="setTipoQuarto()" ng-options="kv as kv.value for kv in data.modalModel.tipoQuartoOptions.items track by kv.key" data-placeholder-text-single="'Selecione um(a) Tipo de Quarto'"></select>
+                        <p ng-show="hoteisForm.tipoquartooptions.$invalid && !hoteisForm.tipoquartooptions.$pristine" class="help-block">Informe o campo Tipo de Quarto</p>
+                    </div>
+                    <div class="col-md-6 form-group" ng-class="{ 'has-error' : hoteisForm.datadiaria.$invalid && !hoteisForm.datadiaria.$pristine }">
+                        <label>Data da Reserva</label>
+                        <div class="input-group date">
+                            <input name="datadiaria" type="datetime" class="form-control input-lg" date-time ng-model="data.modalModel.dataDiaria" view="date" format="DD/MM/YYYY" min-view="date" auto-close="true" required />
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                        <p ng-show="hoteisForm.datadiaria.$invalid && !hoteisForm.datadiaria.$pristine" class="help-block">Informe o campo Data da Reserva</p>
+                    </div>
+                    <div class="col-md-6 form-group" ng-class="{ 'has-error' : hoteisForm.quantidadereservada.$invalid && !hoteisForm.quantidadereservada.$pristine }">
+                        <label>Quantidade Reservada</label>
+                        <input name="quantidadereservada" type="text" class="form-control input-lg" ng-model="data.modalModel.quantidadeReservada" required />
+                        <p ng-show="hoteisForm.quantidadereservada.$invalid && !hoteisForm.quantidadereservada.$pristine" class="help-block">Informe o campo Quantidade Reservada</p>
+                    </div>
+                    <div class="col-md-6 form-group" ng-class="{ 'has-error' : hoteisForm.valordiaria.$invalid && !hoteisForm.valordiaria.$pristine }">
+                        <label>Valor da Diária</label>
+                        <input name="valordiaria" type="text" class="form-control input-lg" ng-model="data.modalModel.valorDiaria" required />
+                        <p ng-show="hoteisForm.valordiaria.$invalid && !hoteisForm.valordiaria.$pristine" class="help-block">Informe o campo Valor da Diária</p>
+                    </div>
+                    <div class="col-md-6 form-group" ng-class="{ 'has-error' : hoteisForm.permitecamaadicional.$invalid && !hoteisForm.permitecamaadicional.$pristine }">
+                        <label>Permite Cama Adicional</label>
+                        <br /><input icheck name="permitecamaadicional" type="checkbox" class="form-control input-lg" ng-model="data.modalModel.permiteCamaAdicional" />
+                        <p ng-show="hoteisForm.permitecamaadicional.$invalid && !hoteisForm.permitecamaadicional.$pristine" class="help-block">Informe o campo Permite Cama Adicional</p>
+                    </div>
+                    <div class="col-md-6 form-group" ng-class="{ 'has-error' : hoteisForm.valorhospedeadicional.$invalid && !hoteisForm.valorhospedeadicional.$pristine }">
+                        <label>Valor Adicional por Pessoa</label>
+                        <input name="valorhospedeadicional" type="text" class="form-control input-lg" ng-model="data.modalModel.valorHospedeAdicional" />
+                        <p ng-show="hoteisForm.valorhospedeadicional.$invalid && !hoteisForm.valorhospedeadicional.$pristine" class="help-block">Informe o campo Valor Adicional por Pessoa</p>
+                    </div>
+                    <div class="col-md-12 form-group" ng-class="{ 'has-error' : hoteisForm.observacao.$invalid && !hoteisForm.observacao.$pristine }">
+                        <label>Observação</label>
+                        <br /><textarea name="observacao" class="form-control input-lg" rows="4" ng-model="data.modalModel.observacao"></textarea>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary btn-lg pull-right" ng-disabled="hoteisForm.$invalid">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

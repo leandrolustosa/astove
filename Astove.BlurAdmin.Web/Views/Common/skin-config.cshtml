@@ -1,0 +1,96 @@
+@{
+    Layout = null;
+}
+<div ng-controller="ConfigurationCtrl" class="theme-config">
+    <div class="theme-config-box">
+        <div class="spin-icon">
+            <i class="fa fa-cogs fa-spin"></i>
+        </div>
+        <div class="skin-setttings">
+            <div class="title">Configura��o</div>
+            
+            <div class="setings-item">
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label>Esconder menu</label>    
+                        <div class="pull-right">
+                            <input icheck type="checkbox" ng-model="global.collapseMenu" ng-change="setCollapseMenu()">
+                        </div>                    
+                    </div>
+                </div>
+            </div>
+           
+            <div class="title">Skins</div>
+                <div class="setings-item default-skin" ng-click="setSkinClass('')">
+                    <span class="skin-name ">
+                        <a class="s-skin-0">
+                            Padr�o
+                        </a>
+                    </span>
+                </div>
+                <div class="setings-item blue-skin" ng-click="setSkinClass('skin-1')">
+                    <span class="skin-name ">
+                        <a class="s-skin-1">
+                            Azul claro
+                        </a>
+                    </span>
+                </div>
+                <div class="setings-item ultra-skin" ng-click="setSkinClass('skin-2')">
+                    <span class="skin-name ">
+                        <a class="s-skin-2">
+                            Azul escuro
+                        </a>
+                    </span>
+                </div>
+                <div class="setings-item yellow-skin" ng-click="setSkinClass('skin-3')">
+                    <span class="skin-name ">
+                        <a class="s-skin-3">
+                            Amarelo/Roxo
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+</div>
+<script>
+
+
+    // Enable/disable collapse menu
+    //$('#collapsemenu').click(function () {
+    //    if ($('#collapsemenu').is(':checked')) {
+    //        $("body").addClass('mini-navbar');
+    //        SmoothlyMenu();
+    //    } else {
+    //        $("body").removeClass('mini-navbar');
+    //        SmoothlyMenu();
+    //    }
+    //});
+
+    // SKIN Select
+    $('.spin-icon').click(function () {
+        $(".theme-config-box").toggleClass("show");
+    });
+
+    // Helper function - only for demo purpose
+    function SmoothlyMenu() {
+        if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
+            // Hide menu in order to smoothly turn on when maximize menu
+            $('#side-menu').hide();
+            // For smoothly turn on menu
+            setTimeout(
+                    function () {
+                        $('#side-menu').fadeIn(500);
+                    }, 100);
+        } else if ($('body').hasClass('fixed-sidebar')){
+            $('#side-menu').hide();
+            setTimeout(
+                    function () {
+                        $('#side-menu').fadeIn(500);
+                    }, 300);
+        } else {
+            // Remove all inline style from jquery fadeIn function to reset menu state
+            $('#side-menu').removeAttr('style');
+        }
+    }
+
+</script>

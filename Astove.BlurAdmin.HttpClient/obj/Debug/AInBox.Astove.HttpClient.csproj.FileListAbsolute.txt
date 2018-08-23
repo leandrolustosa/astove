@@ -1,0 +1,1 @@
+C:\GIT\ainbox\astove-inspinia\AInBox.Astove.HttpClient\obj\Debug\AInBox.Astove.HttpClient.csprojResolveAssemblyReference.cache

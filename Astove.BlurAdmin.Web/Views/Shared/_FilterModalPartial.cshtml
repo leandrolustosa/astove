@@ -1,0 +1,59 @@
+@{
+    string str = ViewData["filterProperty"] as string;
+
+    ViewBag.filter = (!string.IsNullOrEmpty(str) ? string.Format(".{0}", ViewData["filterProperty"]) : string.Empty);
+    ViewBag.parent = (!string.IsNullOrEmpty(str) ? string.Format("data.modalEntity.{0}.", ViewData["filterProperty"]) : "data.modalEntity.");
+    ViewBag.entity = (!string.IsNullOrEmpty(str) ? string.Format("this, '{0}'", ViewData["filterProperty"]) : "this").Replace(".", "");
+}
+
+<div class="row" ng-if="@(ViewBag.parent)filterOptions.filters.length > 0">
+    <div class="col-sm-1">
+        <div class="label label-default">Filtros:</div>
+    </div>
+    <div class="col-sm-3">
+        <select ng-model="data.modalCondition@(ViewBag.filter).index" class="input-lg form-control input-s-lg inline">
+            <option value="">
+                (selecione)
+            </option>
+            <option ng-repeat="f in @(ViewBag.parent)filterOptions.filters" value="{{$index}}">
+                {{f.displayName}}
+            </option>
+        </select>
+    </div>
+    <div ng-show="data.modalCondition@(ViewBag.filter).index!=''" class="col-sm-2">
+        <select ng-model="data.modalCondition@(ViewBag.filter).defaultOperator" ng-options="op.key as op.value for op in data.modalCondition@(ViewBag.filter).operators" class="input-lg form-control input-s-lg inline"></select>
+    </div>
+    <div class="col-sm-3" ng-show="data.modalCondition@(ViewBag.filter).index!='' && data.modalCondition@(ViewBag.filter).displayOperator.indexOf('existe') < 0">
+        <div ng-if="data.modalCondition@(ViewBag.filter).filterType.indexOf('LikeFilter') > -1 || data.modalCondition@(ViewBag.filter).filterType.indexOf('DecimalFilter') > -1">
+            <input name="value" ng-if="data.modalCondition@(ViewBag.filter).mask == null || data.modalCondition@(ViewBag.filter).mask == ''" type="text" ng-value="{{data.modalCondition@(ViewBag.filter).defaultValue}}" ng-model="data.modalCondition@(ViewBag.filter).defaultValue" class="input-lg form-control input-s-lg inline" />
+            <input name="mask-value" ng-if="data.modalCondition@(ViewBag.filter).mask != null  && data.modalCondition@(ViewBag.filter).mask != ''" type="text" ng-value="{{data.modalCondition@(ViewBag.filter).defaultValue}}" ng-model="data.modalCondition@(ViewBag.filter).defaultValue" class="input-lg form-control input-s-lg inline" ui-mask="data.modalCondition@(ViewBag.filter).mask" model-view-value="true" />
+        </div>
+        <div ng-if="data.modalCondition@(ViewBag.filter).filterType.indexOf('DateFilter') > -1">
+            <input type="datetime" class="input-lg form-control input-s-lg inline" date-time ng-model="data.modalCondition@(ViewBag.filter).defaultValue" view="date" format="DD/MM/YYYY" min-view="date" auto-close="true" />
+        </div>
+        <div ng-if="data.modalCondition@(ViewBag.filter).filterType.indexOf('EnumFilter') > -1 || data.modalCondition@(ViewBag.filter).filterType.indexOf('BooleanFilter') > -1 || data.modalCondition@(ViewBag.filter).filterType.indexOf('FKDropdownListFilter') > -1">
+            <select ng-model="data.modalCondition@(ViewBag.filter).defaultValue" ng-options="op.key as op.value for op in data.modalCondition@(ViewBag.filter).domainValues" class="input-lg form-control input-s-lg inline">
+                <option value="" ng-selected="{{data.modalCondition@(ViewBag.filter).defaultValue == ''}}">
+                    (selecione)
+                </option>
+            </select>
+        </div>
+    </div>
+    <button type="button" ng-click="filter.addModalFilter(@(ViewBag.entity))" class="btn btn-lg btn-primary">
+        &#43;
+    </button>
+</div>
+
+<div class="row">
+    <div class="col-sm-1">
+        &nbsp;
+    </div>
+    <div class="col-sm-11">
+        <ul class="list-inline">
+            <li ng-repeat="condition in @(ViewBag.parent)filterConditions">
+                <span class="label label-default">{{condition.displayName + " " + condition.displayOperator + " " + condition.displayValue}}</span>
+                <button type="button" class="btn btn-danger btn-xs" aria-hidden="true" ng-click="filter.removeModalFilter(@(ViewBag.entity))">&#120;</button>
+            </li>
+        </ul>
+    </div>
+</div>

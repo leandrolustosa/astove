@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApiDoodle.Web</name>
+    </assembly>
+    <members>
+        <member name="M:WebApiDoodle.DictionaryExtensions.TryGetValue``1(System.Collections.Generic.IDictionary{System.String,System.Object},System.String,``0@)">
+            <summary>
+            Gets the value of <typeparamref name="T"/> associated with the specified key or <c>default</c> value if
+            either the key is not present or the value is not of type <typeparamref name="T"/>. 
+            </summary>
+            <typeparam name="T">The type of the value associated with the specified key.</typeparam>
+            <param name="collection">The <see cref="T:System.Collections.Generic.IDictionary`2"/> instance where <c>TValue</c> is <c>object</c>.</param>
+            <param name="key">The key whose value to get.</param>
+            <param name="value">When this method returns, the value associated with the specified key, if the key is found; otherwise, the default value for the type of the value parameter.</param>
+            <returns><c>true</c> if key was found, value is non-null, and value is of type <typeparamref name="T"/>; otherwise false.</returns>
+        </member>
+        <member name="T:WebApiDoodle.Error">
+            <summary>
+            Utility class for creating and unwrapping <see cref="T:System.Exception"/> instances.
+            </summary>
+        </member>
+        <member name="M:WebApiDoodle.Error.InvalidOperation(System.String,System.Object[])">
+            <summary>
+            Creates an <see cref="T:System.InvalidOperationException"/>.
+            </summary>
+            <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+            <param name="messageArgs">An object array that contains zero or more objects to format.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="T:WebApiDoodle.Web.TypeHelper">
+            <summary>
+            A static class that provides various <see cref="T:System.Type"/> related helpers.
+            </summary>
+            <remarks>Taken from ASP.NET Web API source code.</remarks>
+        </member>
+        <member name="M:WebApiDoodle.Web.TypeHelper.OfType``1(System.Object[])">
+            <summary>
+            Fast implementation to get the subset of a given type.
+            </summary>
+            <typeparam name="T">type to search for</typeparam>
+            <returns>subset of objects that can be assigned to T</returns>
+        </member>
+        <member name="M:WebApiDoodle.Web.HttpRequestMessageExtensions.GetService``1(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Gets the value of <typeparamref name="TService"/> through the registered 
+            <see cref="T:System.Web.Http.Dependencies.IDependencyScope"/> instance for the <see cref="T:System.Net.Http.HttpRequestMessage"/> instance.
+            </summary>
+            <typeparam name="TService">The type of dependency</typeparam>
+            <param name="request">The <see cref="T:System.Net.Http.HttpRequestMessage"/> instance</param>
+        </member>
+        <member name="M:WebApiDoodle.Web.HttpRequestMessageExtensions.GetProperty``1(System.Net.Http.HttpRequestMessage,System.String)">
+            <summary>
+            Gets the value of <typeparamref name="T"/> associated with the specified key through the Properties dictionary 
+            of the <see cref="T:System.Net.Http.HttpRequestMessage"/> instance or <c>default</c> value if either the key is 
+            not present or the value is not of type <typeparamref name="T"/>. 
+            </summary>
+            <typeparam name="T">The type of the value associated with the specified key.</typeparam>
+            <param name="request">The <see cref="T:System.Net.Http.HttpRequestMessage"/> instance</param>
+            <param name="key">The key whose value to get.</param>
+            <returns>The object of type <typeparamref name="T"/> if key was found, value is non-null, and value is of type <typeparamref name="T"/>; otherwise <c>null</c>.</returns>
+        </member>
+        <member name="T:WebApiDoodle.Web.Controllers.ComplexTypeAwareActionSelector">
+            <summary>
+            Reflection based action selector based on ApiControllerActionSelector implementation.
+            As the private parts cannot be customized, this action selector is very similar with CustomApiControllerActionSelector.
+            We optimize for the case where we have an <see cref="T:WebApiDoodle.Web.Controllers.ComplexTypeAwareActionSelector"/> instance per <see cref="T:System.Web.Http.Controllers.HttpControllerDescriptor"/>
+            instance but can support cases where there are many <see cref="T:System.Web.Http.Controllers.HttpControllerDescriptor"/> instances for one 
+            <see cref="T:WebApiDoodle.Web.Controllers.ComplexTypeAwareActionSelector"/> as well. In the latter case the lookup is slightly slower because it goes through
+            the <see cref="P:System.Web.Http.Controllers.HttpControllerDescriptor.Properties"/> dictionary.
+            </summary>
+            <remarks>Most of the code has been taken from <see cref="T:System.Web.Http.Controllers.ApiControllerActionSelector"/>.</remarks>
+        </member>
+        <member name="T:WebApiDoodle.Web.MessageHandlers.BasicAuthenticationHandler">
+            <summary>
+            HTTP Basic Authentication abstraction message handler
+            </summary>
+        </member>
+        <member name="M:WebApiDoodle.Web.MessageHandlers.BasicAuthenticationHandler.#ctor">
+            <summary>
+            Parameterless constructor. Sets the SuppressIfAlreadyAuthenticated to false.
+            </summary>
+        </member>
+        <member name="M:WebApiDoodle.Web.MessageHandlers.BasicAuthenticationHandler.#ctor(System.Boolean)">
+            <summary>
+            Constructor to supply the SuppressIfAlreadyAuthenticated value.
+            </summary>
+            <param name="suppressIfAlreadyAuthenticated">Indicates whether the authentication should be suppressed if the request is already authenticated.</param>
+        </member>
+        <member name="M:WebApiDoodle.Web.MessageHandlers.BasicAuthenticationHandler.AuthenticateUserAsync(System.Net.Http.HttpRequestMessage,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            The method which is responsable for authenticating the user based on the provided credentials.
+            </summary>
+            <param name="request"></param>
+            <param name="username">The username value extracted from BasicAuth header.</param>
+            <param name="password">The password value extracted from BasicAuth header.</param>
+            <param name="cancellationToken">A cancellation token to cancel operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApiDoodle.Web.MessageHandlers.BasicAuthenticationHandler.HandleUnauthenticatedRequest(WebApiDoodle.Web.UnauthenticatedRequestContext)">
+            <summary>
+            Called when the request is unauthenticated.
+            </summary>
+            <param name="context">Context object which carries the HTTP request message to send to the server and the empty HTTP response property.</param>
+        </member>
+        <member name="P:WebApiDoodle.Web.MessageHandlers.BasicAuthenticationHandler.SuppressIfAlreadyAuthenticated">
+            <summary>
+            Indicates whether the authenticated should be suppressed if 
+            the request is already authenticated
+            </summary>
+        </member>
+        <member name="T:WebApiDoodle.Web.SRResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:WebApiDoodle.Web.SRResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:WebApiDoodle.Web.SRResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:WebApiDoodle.Web.SRResources.ActionSelector_AmbiguousMatchType">
+            <summary>
+              Looks up a localized string similar to {0} on type {1}.
+            </summary>
+        </member>
+        <member name="P:WebApiDoodle.Web.SRResources.ApiControllerActionSelector_ActionNameNotFound">
+            <summary>
+              Looks up a localized string similar to No action was found on the controller &apos;{0}&apos; that matches the name &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:WebApiDoodle.Web.SRResources.ApiControllerActionSelector_ActionNotFound">
+            <summary>
+              Looks up a localized string similar to No action was found on the controller &apos;{0}&apos; that matches the request..
+            </summary>
+        </member>
+        <member name="P:WebApiDoodle.Web.SRResources.ApiControllerActionSelector_AmbiguousMatch">
+            <summary>
+              Looks up a localized string similar to Multiple actions were found that match the request: {0}.
+            </summary>
+        </member>
+        <member name="P:WebApiDoodle.Web.SRResources.ApiControllerActionSelector_HttpMethodNotSupported">
+            <summary>
+              Looks up a localized string similar to The requested resource does not support http method &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:WebApiDoodle.Web.SRResources.ResourceNotFound">
+            <summary>
+              Looks up a localized string similar to No HTTP resource was found that matches the request URI &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="T:WebApiDoodle.Web.Controllers.ApiControllerBase">
+            <summary>
+            Base APiController class which provides aditional two methods that run before and after the controller execution
+            </summary>
+        </member>
+        <member name="M:WebApiDoodle.Web.Controllers.ApiControllerBase.OnControllerExecuting(WebApiDoodle.Web.Controllers.HttpControllerExecutingContext)">
+            <summary>
+            The method which will run just before the controller execution.
+            If this method sets HttpControllerExecutingContext.Response property to a non-null
+            value, then the controller execution will be terminated and the given response
+            message will be pass through.
+            </summary>
+            <param name="controllerExecutingContext"></param>
+        </member>
+        <member name="M:WebApiDoodle.Web.Controllers.ApiControllerBase.OnControllerExecuted(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            The method which will run just after the controller execution. If the 
+            returned Task{HttpResponseMessage} object is not in the RanToCompletion state,
+            the povided HttpResponseMessage parameter will be null.
+            </summary>
+            <param name="response"></param>
+        </member>
+        <member name="T:WebApiDoodle.Web.Filters.ApiKeyAuthAttribute">
+            <summary>
+            QueryString Api Key Authorization filter for ASP.NET Web API.
+            </summary>
+        </member>
+        <member name="M:WebApiDoodle.Web.Filters.ApiKeyAuthAttribute.#ctor(System.String,System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="apiKeyQueryParameter">The name of the query string parameter whose value needs to be compared against.</param>
+            <param name="apiKeyAuthorizerType">Type of Api Key Authorizer which implements TugberkUg.Web.Http.IApiKeyAuthorizer</param>
+        </member>
+        <member name="M:WebApiDoodle.Web.Filters.ApiKeyAuthAttribute.HandleUnauthorizedRequest(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Handles the operation on an unauthorized situation
+            </summary>
+            <param name="actionContext"></param>
+        </member>
+        <member name="P:WebApiDoodle.Web.Filters.ApiKeyAuthAttribute.Roles">
+            <summary>
+            The comma seperated list of roles which user needs to be in.
+            </summary>
+        </member>
+        <member name="M:WebApiDoodle.Web.MessageHandlers.ApiKeyAuthenticationHandler.AuthenticateUser(System.String,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            The method which is responsable for authenticating the user based on the provided API Key and request.
+            </summary>
+            <param name="apiKey"></param>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

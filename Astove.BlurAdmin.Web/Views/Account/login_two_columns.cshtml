@@ -1,0 +1,64 @@
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="container" style="margin-top: 40px;" ng-app="loginApp" ng-controller="loginCtrl">    
+    <div class="row">
+
+        <div class="col-md-6">
+            <h3 class="font-bold text-center">Sistemas AI'n'Box</h3>
+            <br />
+            <img class="img-responsive center-block" src="/Images/logo_grande.png" alt="Logo AI'n'Box" />
+
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Informe o seu usuário e senha</div>
+                <div class="panel-body">
+                    <form role="form" name="loginForm" ng-submit="submitForm(loginForm.$valid)" novalidate>
+                        <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@AstoveHelper.GetAntiForgeryToken()'" />
+                        <div ng-show="hasErrors" class="alert alert-danger" role="alert">
+                            {{message}}
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : loginForm.login.$invalid && !loginForm.login.$pristine }">
+                            <input name="login" type="email" class="form-control" ng-model="model.userName" required pattern="[a-z0-9._%+-]+&#64;[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Usuário" />
+                            <p ng-show="loginForm.login.$invalid && !loginForm.login.$pristine" class="help-block">
+                                O campo "usuário" é obrigatório e deve ser um e-mail válido.
+                            </p>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : loginForm.senha.$invalid && !loginForm.senha.$pristine }">
+                            <input name="senha" type="password" class="form-control" ng-model="model.password"
+                                   required ng-minlength="4" ng-maxlength="12" placeholder="Senha" />
+                            <p ng-show="loginForm.senha.$invalid && !loginForm.senha.$pristine" class="help-block">
+                                O campo senha é obrigatório.
+                            </p>
+                            <p ng-show="loginForm.senha.$error.minlength" class="help-block">
+                                Senha muito pequena.
+                            </p>
+                            <p ng-show="loginForm.senha.$error.maxlength" class="help-block">
+                                Senha muito longa.
+                            </p>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid">
+                                    ACESSAR
+                                </button>
+                            </div>
+                            <div class="col-md-6 cel-1 esqueci-senha">
+                                @Html.ActionLink("Esqueci a minha senha", "ForgotPassword", "Account", null, new { @class = "btn btn-link" })
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="al-footer clearfix">
+    <div class="al-footer-right"><small>Desenvolvido por <a href="http://www.ainbox.com.br">&nbsp;&nbsp;<img class="img-responsive pull-right" alt="AI'n'Box" src="/images/logo-ainbox.png" /></a></small></div>
+    <div class="al-footer-main clearfix">
+        <div class="al-copy">&nbsp;</div>
+    </div>
+</footer>

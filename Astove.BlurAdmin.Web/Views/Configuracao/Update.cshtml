@@ -1,0 +1,91 @@
+@{
+    Layout = null;
+}
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Configurações</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a>Configurações</a>
+                </li>
+                <li class="active">
+                    <strong>Edição</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Configurações</h5>
+
+                    <div ibox-tools></div>
+                </div>
+                <div class="ibox-content">
+                    <form role="form" name="configuracoesForm" ng-submit="submitForm(configuracoesForm.$valid)" novalidate>
+
+                        <input id="antiForgeryToken" data-ng-model="antiForgeryToken" type="hidden" data-ng-init="antiForgeryToken='@AstoveHelper.GetAntiForgeryToken()'" />
+
+                        <div ng-show="hasError || success" class="alert alert-dismissible" ng-class="{ 'alert-danger' : hasError, 'alert-success' : success }" role="alert">
+                            <button type="button" class="close" ng-click="showAlert=false;"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+                            <strong>{{messagetype}}!</strong> {{message}}
+                        </div>
+
+                        <div class="col-md-4 form-group" ng-class="{ 'has-error' : configuracoesForm.numeromaximoindicacoes.$invalid && !configuracoesForm.numeromaximoindicacoes.$pristine }">
+                            <label>Número máximo de indicações</label>
+                            <input name="numeromaximoindicacoes" type="text" class="form-control input-lg" ng-model="data.model.numeroMaximoIndicacoes" required />
+                            <p ng-show="configuracoesForm.numeromaximoindicacoes.$invalid && !configuracoesForm.numeromaximoindicacoes.$pristine" class="help-block">Informe o campo Número máximo de indicações</p>
+                        </div>
+                        <div class="col-md-4 form-group" ng-class="{ 'has-error' : configuracoesForm.numerominimovisitas.$invalid && !configuracoesForm.numerominimovisitas.$pristine }">
+                            <label>Número mínimo de visitas</label>
+                            <input name="numerominimovisitas" type="text" class="form-control input-lg" ng-model="data.model.numeroMinimoVisitas" required />
+                            <p ng-show="configuracoesForm.numerominimovisitas.$invalid && !configuracoesForm.numerominimovisitas.$pristine" class="help-block">Informe o campo Número mínimo de visitas</p>
+                        </div>
+                        <div class="col-md-4 form-group" ng-class="{ 'has-error' : configuracoesForm.numerohospedesgratuito.$invalid && !configuracoesForm.numerohospedesgratuito.$pristine }">
+                            <label>Número de hóspedes gratuito</label>
+                            <input name="numerohospedesgratuito" type="text" class="form-control input-lg" ng-model="data.model.numeroHospedesGratuito" required />
+                            <p ng-show="configuracoesForm.numerohospedesgratuito.$invalid && !configuracoesForm.numerohospedesgratuito.$pristine" class="help-block">Informe o campo Número de hóspedes gratuito</p>
+                        </div>
+                        <div class="col-md-4 form-group" ng-class="{ 'has-error' : configuracoesForm.numerodiariasgratuita.$invalid && !configuracoesForm.numerodiariasgratuita.$pristine }">
+                            <label>Número de diárias gratuita</label>
+                            <input name="numerodiariasgratuita" type="text" class="form-control input-lg" ng-model="data.model.numeroDiariasGratuita" required />
+                            <p ng-show="configuracoesForm.numerodiariasgratuita.$invalid && !configuracoesForm.numerodiariasgratuita.$pristine" class="help-block">Informe o campo Número de diárias gratuita</p>
+                        </div>
+                        <div class="col-md-4 form-group" ng-class="{ 'has-error' : configuracoesForm.intervalohorasentrevisitas.$invalid && !configuracoesForm.intervalohorasentrevisitas.$pristine }">
+                            <label>Número de horas para cada visita</label>
+                            <input name="intervalohorasentrevisitas" type="text" class="form-control input-lg" ng-model="data.model.intervaloHorasEntreVisitas" required />
+                            <p ng-show="configuracoesForm.intervalohorasentrevisitas.$invalid && !configuracoesForm.intervalohorasentrevisitas.$pristine" class="help-block">Informe o campo Número de horas para cada visita</p>
+                        </div>
+
+                        <div class="col-md-12 form-group" ng-class="{ 'has-error' : configuracoesForm.bannervoucherurl.$invalid && !configuracoesForm.bannervoucherurl.$pristine }">
+                            <label>Banner padrão do voucher</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="m-b-md"><input type="file" id="fileInput$bannerVoucherUrl" class="form-control fileInputImage" ngf-select ngf-change="onImageSelect($files, $event)" ngf-multiple="false" ngf-accept="'*.jpg,*.png'" /></div>
+                                    <div class="cropArea"><img-crop id="imgCrop$imagemUrl" area-type="rectangle" image="data.model.bannerVoucherUrlSource" result-image="data.model.bannerVoucherUrl" area-coords="areaCoords" aspect-ratio="aspectRatio" on-change="onChanged($dataURI, $imageData, $itemId)"></img-crop></div>
+                                    <p ng-show="configuracoesForm.bannervoucherurl.$invalid && !configuracoesForm.bannervoucherurl.$pristine" class="help-block">Informe o campo Banner padrão do voucher</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4>Imagem recortada</h4>
+                                    <div class="m-b-md"><img ng-src="{{data.model.bannerVoucherUrl}}" width="{{areaCoords.w}}" height="{{areaCoords.h}}" /></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary btn-lg pull-right" ng-disabled="configuracoesForm.$invalid">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApiDoodle.Net.Http.Client</name>
+    </assembly>
+    <members>
+        <member name="M:WebApiDoodle.DictionaryExtensions.TryGetValue``1(System.Collections.Generic.IDictionary{System.String,System.Object},System.String,``0@)">
+            <summary>
+            Gets the value of <typeparamref name="T"/> associated with the specified key or <c>default</c> value if
+            either the key is not present or the value is not of type <typeparamref name="T"/>. 
+            </summary>
+            <typeparam name="T">The type of the value associated with the specified key.</typeparam>
+            <param name="collection">The <see cref="T:System.Collections.Generic.IDictionary`2"/> instance where <c>TValue</c> is <c>object</c>.</param>
+            <param name="key">The key whose value to get.</param>
+            <param name="value">When this method returns, the value associated with the specified key, if the key is found; otherwise, the default value for the type of the value parameter.</param>
+            <returns><c>true</c> if key was found, value is non-null, and value is of type <typeparamref name="T"/>; otherwise false.</returns>
+        </member>
+        <member name="T:WebApiDoodle.Error">
+            <summary>
+            Utility class for creating and unwrapping <see cref="T:System.Exception"/> instances.
+            </summary>
+        </member>
+        <member name="M:WebApiDoodle.Error.InvalidOperation(System.String,System.Object[])">
+            <summary>
+            Creates an <see cref="T:System.InvalidOperationException"/>.
+            </summary>
+            <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+            <param name="messageArgs">An object array that contains zero or more objects to format.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="T:WebApiDoodle.Net.Http.Client.HttpApiClient`1">
+            <summary>
+            Generic base class for the .NET HTTP clients.
+            </summary>
+            <typeparam name="TResult">Type of the result type which is expected.</typeparam>
+        </member>
+        <member name="M:WebApiDoodle.Net.Http.Client.HttpApiClient`1.#ctor(System.Net.Http.HttpClient)">
+            <summary>
+            Initializes a new instance of the WebApiDoodle.Net.Http.Client.HttpApiClient
+            with a specific System.Net.Http.HttpClient.
+            </summary>
+            <remarks>
+            The specified System.Net.Http.HttpClient is not going to be disposed by the 
+            WebApiDoodle.Net.Http.Client.HttpApiClient instance as a System.Net.Http.HttpClient 
+            instance can be used throughout the application lifecycle.
+            </remarks>
+            <param name="httpClient">The <see cref="T:System.Net.Http.HttpClient"/> instance to use for handling requests.</param>
+        </member>
+        <member name="M:WebApiDoodle.Net.Http.Client.HttpApiClient`1.#ctor(System.Net.Http.HttpClient,System.Collections.Generic.IEnumerable{System.Net.Http.Formatting.MediaTypeFormatter})">
+            <summary>
+            Initializes a new instance of the WebApiDoodle.Net.Http.Client.HttpApiClient
+            with a specific System.Net.Http.HttpClient.
+            </summary>
+            <remarks>
+            The specified System.Net.Http.HttpClient is not going to be disposed by the 
+            WebApiDoodle.Net.Http.Client.HttpApiClient instance as a System.Net.Http.HttpClient 
+            instance can be used throughout the application lifecycle.
+            </remarks>
+            <param name="httpClient">The <see cref="T:System.Net.Http.HttpClient"/> instance to use for handling requests.</param>
+            <param name="formatters">The collection of <see cref="T:System.Net.Http.Formatting.MediaTypeFormatter"/> instances to use.</param>
+        </member>
+        <member name="M:WebApiDoodle.Net.Http.Client.HttpApiClient`1.#ctor(System.Net.Http.HttpClient,System.Collections.Generic.IEnumerable{System.Net.Http.Formatting.MediaTypeFormatter},System.Net.Http.Formatting.MediaTypeFormatter)">
+            <summary>
+            Initializes a new instance of the WebApiDoodle.Net.Http.Client.HttpApiClient
+            with a specific System.Net.Http.HttpClient.
+            </summary>
+            <remarks>
+            The specified System.Net.Http.HttpClient is not going to be disposed by the 
+            WebApiDoodle.Net.Http.Client.HttpApiClient instance as a System.Net.Http.HttpClient 
+            instance can be used throughout the application lifecycle.
+            </remarks>
+            <param name="httpClient">The <see cref="T:System.Net.Http.HttpClient"/> instance to use for handling requests.</param>
+            <param name="formatters">The collection of <see cref="T:System.Net.Http.Formatting.MediaTypeFormatter"/> instances to use.</param>
+            <param name="writerMediaTypeFormatter">The writer formatter which is of type <see cref="T:System.Net.Http.Formatting.MediaTypeFormatter"/> will be used to serialize the request body.</param>
+        </member>
+        <member name="P:WebApiDoodle.Net.Http.Client.HttpApiResponseMessage.Response">
+            <summary>
+            Represents the HttpResponseMessage for the request.
+            </summary>
+        </member>
+        <member name="P:WebApiDoodle.Net.Http.Client.HttpApiResponseMessage.IsSuccess">
+            <summary>
+            Determines if the response is a success or not.
+            </summary>
+        </member>
+        <member name="P:WebApiDoodle.Net.Http.Client.HttpApiResponseMessage.HttpError">
+            <summary>
+            Represents the HTTP error message retrieved from the server if the response has "400 Bad Request" status code.
+            </summary>
+        </member>
+        <member name="T:WebApiDoodle.Net.Http.Client.InternalResource">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:WebApiDoodle.Net.Http.Client.InternalResource.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:WebApiDoodle.Net.Http.Client.InternalResource.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:WebApiDoodle.Net.Http.Client.InternalResource.ResolveUriTemplate_NoValueForRequestedParam">
+            <summary>
+              Looks up a localized string similar to Value for requested parameter named &apos;{0}&apos; is not available..
+            </summary>
+        </member>
+        <member name="P:WebApiDoodle.Net.Http.Client.InternalResource.ResolveUriTemplate_PassedParamaterValueAmountErrorMessage">
+            <summary>
+              Looks up a localized string similar to Passed paramater value amount is lower than the required amount by the uriTemplate..
+            </summary>
+        </member>
+    </members>
+</doc>

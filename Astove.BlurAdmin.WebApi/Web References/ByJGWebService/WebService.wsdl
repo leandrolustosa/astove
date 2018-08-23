@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://byjg.ainbox.com.br/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://byjg.ainbox.com.br/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://byjg.ainbox.com.br/">
+      <s:element name="ObterLogradouro">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pass" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cep" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObterLogradouroResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObterLogradouroResult" type="tns:LogradouroModel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LogradouroModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Logradouro" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Bairro" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cidade" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Codigo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Erro" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ObterLogradouroSoapIn">
+    <wsdl:part name="parameters" element="tns:ObterLogradouro" />
+  </wsdl:message>
+  <wsdl:message name="ObterLogradouroSoapOut">
+    <wsdl:part name="parameters" element="tns:ObterLogradouroResponse" />
+  </wsdl:message>
+  <wsdl:portType name="webserviceSoap">
+    <wsdl:operation name="ObterLogradouro">
+      <wsdl:input message="tns:ObterLogradouroSoapIn" />
+      <wsdl:output message="tns:ObterLogradouroSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="webserviceSoap" type="tns:webserviceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObterLogradouro">
+      <soap:operation soapAction="http://byjg.ainbox.com.br/ObterLogradouro" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="webserviceSoap12" type="tns:webserviceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObterLogradouro">
+      <soap12:operation soapAction="http://byjg.ainbox.com.br/ObterLogradouro" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="webservice">
+    <wsdl:port name="webserviceSoap" binding="tns:webserviceSoap">
+      <soap:address location="http://byjg.ainbox.com.br/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="webserviceSoap12" binding="tns:webserviceSoap12">
+      <soap12:address location="http://byjg.ainbox.com.br/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

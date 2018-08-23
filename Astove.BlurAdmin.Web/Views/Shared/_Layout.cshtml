@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="@Html.Raw(ViewBag.Application != null ? ViewBag.Application : "AstoveApp")">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+
+    <link rel="shortcut icon" type="image/png" href="/Content/jasmine/jasmine_favicon.png">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="images/bluradmin/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/bluradmin/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/bluradmin/favicon-96x96.png">
+
+    @Styles.Render("~/Content/bluradmin")      
+    @RenderSection("scriptsHeader", required: false)    
+</head>
+
+<!-- ControllerAs syntax -->
+<!-- Main controller with serveral data used in Inspinia theme on diferent view -->
+<body ng-controller="MainCtrl" ng-class="[global.skinClass, global.collapseMenuClass]">
+
+    @*<div id="ProgressDIV" ng-show="global.loading" ng-controller="LoadingCtrl">
+        <div class="box-load">
+            <label>
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+                <span class="sr-only">Carregando...</span>
+            </label>
+        </div>
+    </div>*@
+
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/libraries")
+
+    <script type="text/javascript">
+        XMLHttpRequest.prototype = Object.getPrototypeOf(new XMLHttpRequest);
+    </script>
+    
+    @RenderSection("scriptsBeforeAngular", required: false)
+
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/plugins")
+
+    <!--
+     You need to include this script on any page that has a Google Map.
+     When using Google Maps on your own site you MUST signup for your own API key at:
+     https://developers.google.com/maps/documentation/javascript/tutorial#api_key
+     After your sign up replace the key in the URL below..
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQTpXj82d8UpCi97wzo_nKXL7nYrd4G70"></script>
+        -->
+    @RenderSection("scriptsAfterAngular", required: false)
+
+    @Scripts.Render("~/bundles/bluradmin")
+    @Scripts.Render("~/bundles/angular-app")
+    @this.RenderViewAstoveBundle()
+
+    @RenderSection("scriptsAfterAstove", required: false)
+</body>
+</html>
